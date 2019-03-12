@@ -1,4 +1,8 @@
+
+
 package question3;
+
+import java.text.Normalizer;
 
 /**
  * NFP121 TpIntroduction, usage de BlueJ et du "Submitter".
@@ -44,8 +48,25 @@ public class AuditeurCNAM {
      * @return le login du Cnam simplifié, sans les adaptations dues aux
      *         homonymes...
      */
+    
     public String login() {
-        return "";// à compléter
+        String result = "";
+        
+        /*  remove Accents*/
+        String sansAccentnom = removeAccents(this.nom);
+        String sansAccentprenom = removeAccents(this.prenom);
+        /*  remove all special characters*/
+        String escapednom = sansAccentnom.replaceAll("[^a-zA-Z0-9\\s+]", "_");
+        String escapedprenom = sansAccentprenom.replaceAll("[^a-zA-Z0-9\\s+]", "_");
+
+        String first6caracternom = escapednom.substring(0, Math.min(escapednom.length(), 6));
+        String first1caracterprenom = escapedprenom.substring(0, Math.min(escapedprenom.length(), 1));
+
+        result = first6caracternom + "_" +first1caracterprenom;
+
+        result.toLowerCase();
+
+        return result;
     }
 
     /**
@@ -54,7 +75,7 @@ public class AuditeurCNAM {
      * @return son nom
      */
     public String nom() {
-        return null;// à compléter
+        return this.nom;// à compléter
     }
 
     /**
@@ -63,7 +84,7 @@ public class AuditeurCNAM {
      * @return son prénom
      */
     public String prenom() {
-        return null;// à compléter
+        return this.prenom;// à compléter
     }
 
     /**
@@ -72,7 +93,7 @@ public class AuditeurCNAM {
      * @return son matricule
      */
     public String matricule() {
-        return null;// à compléter
+        return this.matricule;// à compléter
     }
 
     /**
@@ -85,6 +106,13 @@ public class AuditeurCNAM {
     @Override
     public String toString() {
         return nom() + " " + prenom() + " login : " + login();
+    }
+    
+    
+    
+    public static String removeAccents(String text) {
+        return text == null ? null : Normalizer.normalize(text, Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
 
 }

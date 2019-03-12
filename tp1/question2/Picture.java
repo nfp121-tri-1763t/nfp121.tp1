@@ -3,6 +3,8 @@ package question2;
 import question1.Circle;
 import question1.Square;
 import question1.Triangle;
+import java.awt.*;
+import java.awt.geom.*;
 
 /**
  * This class represents a simple picture. You can draw the picture using the
@@ -20,6 +22,9 @@ public class Picture {
     private Square window;
     private Triangle roof;
     private Circle sun;
+    private Circle sunyellow;
+    private int yPosition = -20;
+    private int xPosition = 110;
 
     /**
      * Constructor for objects of class Picture
@@ -50,11 +55,18 @@ public class Picture {
         roof.makeVisible();
 
         sun = new Circle();
-        sun.changeColor("yellow");
-        sun.moveHorizontal(180);
-        sun.moveVertical(-10);
+        sun.changeColor("blue");
+        sun.moveHorizontal(xPosition);
+        sun.moveVertical(yPosition);
         sun.changeSize(60);
         sun.makeVisible();
+        
+        sunyellow = new Circle();
+        sunyellow.changeColor("yellow");
+        sunyellow.moveHorizontal(150);
+        sunyellow.moveVertical(-20);
+        sunyellow.changeSize(80);
+        sunyellow.makeVisible();
     }
 
     /**
@@ -82,5 +94,12 @@ public class Picture {
             sun.changeColor("yellow");
         }
     }
+      
+    /** soleil ( bleu) de se coucher */
+    public void coucher(){
+    sun.slowMoveVertical(250);
+    }
+    
+  
 
 }
